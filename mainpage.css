@@ -1,0 +1,87 @@
+/* mainpage.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #E1E2FF;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid black;
+    background-color: #F3EAFF;
+    border-radius: 10px;
+    text-align: center;
+}
+#taskList {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* mainpage.css */
+.taskContainer {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.taskItem {
+    margin-bottom: 10px;
+    padding: 5px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    margin: 0 auto;
+    display: block;
+}
+
+button {
+    background-color: #C2C4FF;
+    color: #000000;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    border-color: black;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p {
+    margin-top: 30px;
+}

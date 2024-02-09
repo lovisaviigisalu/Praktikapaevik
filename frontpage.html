@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="mainpage.css">
+</head>
+<body>
+<div class="container">
+    <h1>Tasks</h1>
+    <button id="openFormButton">+</button>
+    <form id="taskForm" action="/addTask" method="POST" style="display: none;">
+        <label for="date">Date:</label><br>
+        <input type="date" id="date" name="date" required><br>
+
+        <label for="description">Description:</label><br>
+        <input type="text" id="description" name="description" required><br>
+
+        <label for="hours">Hours:</label><br>
+        <input type="number" id="hours" name="hours" required><br><br>
+
+        <button type="submit">Add Task</button>
+    </form>
+    <form action="/logout" method="get">
+        <button type="submit">Logout</button>
+    </form>
+
+    <div id="taskList"></div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log("DOM content loaded"); // Check if DOM content is loaded
+        const openFormButton = document.getElementById("openFormButton");
+        const taskForm = document.getElementById("taskForm");
+
+        if (openFormButton && taskForm) {
+            openFormButton.addEventListener("click", function() {
+                console.log("Button clicked"); // Check if the button is clicked
+                taskForm.style.display = taskForm.style.display === "none" ? "block" : "none";
+                openFormButton.style.display = "none"; // Hide the button when form is displayed
+            });
+
+            // Fetch tasks and update the webpage
+            fetchTasks();
+        } else {
+            console.error("Button or form not found"); // Log an error if button or form is not found
+        }
+    });
+
+    function fetchTasks() {
+        fetch('/tasks')
+            .then(response => response.json())
+            .then(tasks => {
+                const taskList = document.getElementById('taskList');
+                taskList.innerHTML = ''; // Clear previous tasks
+                tasks.forEach(task => {
+                    // Parse the date string and extract only the date part
+                    const taskDate = new Date(task.date);
+                    const formattedDate = taskDate.toISOString().split('T')[0];
+
+                    // Create a div element to display the task
+                    const taskContainer = document.createElement('div');
+                    taskContainer.classList.add('taskContainer'); // Add class for styling
+                    taskContainer.textContent = `${formattedDate}: ${task.description} ${task.hours} hours`;
+
+                    // Add event listener to delete task when clicked
+                    taskContainer.addEventListener("click", function() {
+                        deleteTask(task.id); // Call function to delete the task
+                        taskContainer.remove(); // Remove task from the DOM
+                    });
+
+                    taskList.appendChild(taskContainer); // Append the container
+                });
+                document.getElementById("openFormButton").style.display = "block"; // Show the button after tasks are fetched
+            })
+            .catch(error => console.error('Error fetching tasks:', error));
+    }
+
+    // Function to delete task
+    function deleteTask(taskId) {
+        fetch(`/tasks/${taskId}`, {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to delete task');
+                }
+                console.log('Task deleted successfully');
+            })
+            .catch(error => console.error('Error deleting task:', error));
+    }
+</script>
+
+</body>
+</html>
+
+

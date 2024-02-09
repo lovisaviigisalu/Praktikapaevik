@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ee">
+<head>
+    <title>Registreerimine</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="Register.css">
+</head>
+<body>
+<div class="container">
+    <h1>Registreeru</h1>
+    <form action="/register" method="post">
+        <div class="form-group">
+            <label for="username">Kasutajanimi:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="email">E-posti aadress:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Salasõna:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" id="registerButton">Registreeri</button>
+    </form>
+    <p>Juba registreeritud? <a href="login.html">Logi sisse</a></p>
+
+
+</div>
+</body>
+</html>
